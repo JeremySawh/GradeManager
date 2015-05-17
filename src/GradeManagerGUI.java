@@ -9,6 +9,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.jface.viewers.ListViewer;
+import java.lang.Double;
+
 
 
 
@@ -119,7 +121,7 @@ public class GradeManagerGUI {
 		lblGrade.setText("Grade #");
 		
 		Label lblWeighting = new Label(shell, SWT.NONE);
-		lblWeighting.setBounds(304, 84, 55, 15);
+		lblWeighting.setBounds(304, 84, 76, 15);
 		lblWeighting.setText("Weighting %");
 		
 		Label lblSelect = new Label(shell, SWT.NONE);
@@ -208,13 +210,18 @@ public class GradeManagerGUI {
 				
 				//Make sure Combo Box is not referencing NULL
 				if(SelectedItemIndex != NEGATIVE_ONE)
-				{					
+				{
+					//Make sure something is entered in each field
 					if(GradeName.getText().equals("")||GradeNumber.getText().equals("")|| GradeWeighting.getText().equals("")){}
 					else{
+						//Check to make sure entries are valid
+						if(GradeNumber.getText() instanceof String  || GradeWeighting.getText() instanceof String){}
+						else{
 					Courses.get(SelectedItemIndex).addGrade(GradeName, GradeNumber, GradeWeighting);
 					list.setItems(Courses.get(SelectedItemIndex).ListofGrades());
 					lblAverage.setText("Average:                           " +  Courses.get(SelectedItemIndex).Average());
 					lblCombinedWeighting.setText("Combined Weighting:   " + Courses.get(SelectedItemIndex).CombinedWeighting());
+						}
 					}
 				 }				
 			}
